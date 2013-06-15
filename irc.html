@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>IR Remote</title>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+	    var irsend = function(key){
+	        $.get("ir.php", {cmd:key,device:$("#selectDevice").val() }, function (data, textStatus){
+				 $('#irstat').html(data);
+		       });
+	    };
+	    
+		$('#power').click(function() {
+		   	   $.get("ir.php", {cmd:'KEY_POWER',device:$("#selectDevice").val()}, function (data, textStatus){
+				 $('#irstat').html(data);
+		       });
+		});
+		$('#menu_ok').click(function() {
+		   	   $.get("ir.php", {cmd:'KEY_OK',device:$("#selectDevice").val()}, function (data, textStatus){
+				 $('#irstat').html(data);
+		       });
+		});
+		$('#menu_up').click(function() {
+		   	   $.get("ir.php", {cmd:'KEY_UP',device:$("#selectDevice").val() }, function (data, textStatus){
+				 $('#irstat').html(data);
+		       });
+		});		
+		$('#menu_down').click(function() {
+		   	   $.get("ir.php", {cmd:'KEY_DOWN',device:$("#selectDevice").val() }, function (data, textStatus){
+				 $('#irstat').html(data);
+		       });
+		});		
+		$('#menu_left').click(function() {
+		   	   $.get("ir.php", {cmd:'KEY_LEFT',device:$("#selectDevice").val() }, function (data, textStatus){
+				 $('#irstat').html(data);
+		       });
+		});					
+		$('#menu_right').click(function() {
+		   	   $.get("ir.php", {cmd:'KEY_RIGHT',device:$("#selectDevice").val()}, function (data, textStatus){
+				 $('#irstat').html(data);
+		       });
+		});	
+		$('#mute').click(function() {
+		   	  irsend('KEY_MUTE');
+		});	
+		$('#signal').click(function() {
+		   	  irsend('KEY_AUX');
+		});	
+		$('#mode').click(function() {
+		   	  irsend('KEY_MODE');
+		});	
+		$('#display').click(function() {
+		   	  irsend('KEY_DISPLAYTOGGLE');
+		});	
+		$('#menu').click(function() {
+		   	  irsend('KEY_MENU');
+		});	
+		$('#sound').click(function() {
+		   	  irsend('KEY_SOUND');
+		});	
+
+	});
+
+	</script>
+	<style>
+
+	#menu3{ width:310px;height:340px;margin:5px auto;}
+	#menu1,#menu2,#menu4{ width:310px;margin:0 auto;}
+	#power,#menu,#mute,#signal {width:60px;height:60px; margin:0 10px;}
+	#menu_up,#menu_down,#menu_left,#menu_right,#menu_ok{width:100px;height:100px;}
+	.bottomimage{width:60px;height:60px;margin:0 10px;}
+	</style>
+</head>
+<body>
+<!-- Home -->
+<div data-role="page" id="page1">
+    <div data-theme="a" data-role="header">
+        <h3>
+            IR Remote
+        </h3>
+    </div>
+    <div data-role="content">
+        <div data-role="fieldcontain" id="menu1">
+            <label for="selectDevice">
+                Select Device
+            </label>
+            <select id="selectDevice" name="selectDevice" data-mini="true">
+                <option value="tvbox">
+                    Select Device
+                </option>
+                <option value="tvbox">
+                    tvbox
+                </option>
+                <option value="tv">
+                    tv
+                </option>
+            </select>
+        </div>
+        <div id="menu2" class="ui-grid-c">
+            <div class="ui-block-a">
+                <img src="images/power.png" id="power" />
+            </div>
+            <div class="ui-block-b">
+            <img src="images/menu.png" id="menu" />
+            </div>
+            <div class="ui-block-c">
+            <img src="images/mute.png" id="mute" />
+            </div>
+            <div class="ui-block-d">
+            <img src="images/signal.png" id="signal" class="bottomimage"/>
+            </div>
+        </div>
+        <div id="menu3" class="ui-grid-b">
+            <div class="ui-block-a">
+            </div>
+            <div class="ui-block-b">
+            <img src="images/menu_up.png" id="menu_up" />
+            </div>
+            <div class="ui-block-c">
+            </div>
+            <div class="ui-block-a">
+            <img src="images/menu_left.png" id="menu_left" />
+            </div>
+            <div class="ui-block-b">
+            <img src="images/menu_ok.png" id="menu_ok" />
+            </div>
+            <div class="ui-block-c">
+            <img src="images/menu_right.png" id="menu_right" />
+            </div>
+            <div class="ui-block-a">
+            </div>
+            <div class="ui-block-b">
+            <img src="images/menu_down.png" id="menu_down" />
+            </div>
+            <div class="ui-block-c">
+            </div>
+
+        </div>
+        <div class="ui-grid-c" id="menu4">
+            <div class="ui-block-a">
+            <img src="images/display.png" id="display" class="bottomimage"/>
+            </div>
+            <div class="ui-block-b">
+            <img src="images/standard.png" id="standard" class="bottomimage"/>
+            </div>
+            <div class="ui-block-c">
+            <img src="images/mode.png" id="mode" class="bottomimage"/>
+            </div>
+            <div class="ui-block-d">
+            <img src="images/sound_channel.png" id="sound" class="bottomimage"/>
+            </div>
+        </div>
+        <div id="irstat"></div>
+    </div>
+</div>
+
+
+</body>
+</html>
